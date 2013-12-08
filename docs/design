@@ -1,0 +1,53 @@
+mathservice design notes.
+
+This project is a simple web service example.  Web server interfaces provided
+via Flask (http://flask.pocoo.org/)
+
+This example only implements an overall function_service with one current
+function implemented - the Fibonacci Series.
+
+Web Service mapping.
+
+Get Implemented Functions:  A list of implemented functions can be retrieved 
+with path "/function".  This list is returned in the following JSON form.
+
+{
+   'functions' : [ "function1", "function2", ... ]
+}
+
+
+Implemented functions utilize the GET operation via path 
+"/function/<function_name>"
+
+Functions:
+
+Fibonacci Function - returns the first X numbers in the Fibonacci Series.  
+Function is implemented as a GET /function/fibonacii?number=value.
+
+The Fibonacci return is formatted as a JSON string in the format below.
+
+{
+   'function' : 'fibonacci',
+   'list_size': <number_of_items_in_the_returned_list>, 
+   'fibonacci_numbers': [ 0, 1, 1, 2 .... ]
+}
+
+Errors are, also, returned with JSON formatted string.  Error format is as follows:
+
+{
+   'called_url' : <url string>,
+   'called_method' : <method string>,
+   'error_message': "Error Description string"
+}
+
+Implemented files:
+
+mathservice.py      - Setup and run Flask server.  Receive and process URL mappings.
+fibonacci.py        - Utility to perform Fibonacci Series calculations.
+MathServiceError.py - Class to wrap error information.
+
+in tests directory:
+
+test_math_service.py      - unit tests to validate mappings and responses.
+test_fibonacci.py         - unit tests validating calculations.
+test_service_exception.py - unit tests validating exception information.

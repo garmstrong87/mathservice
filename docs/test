@@ -1,0 +1,26 @@
+mathservice test notes.
+
+This project is a simple web service example. 
+
+TUnit tests were created to test the service utilizing the python unittest 
+framework.  To run the unit tests created for the service perform the following.
+The unit tests are in the tests directory under the mathservice directory.  To 
+run the test cd to the tests directory.  Add the mathservice directory to the path.
+
+For ubuntu this can be done by running 
+
+PYTHONPATH="${PYTHONPATH}:<Path to where you deployed the service>"
+Export PYTHONPATH
+
+Then you can run the command "python -m unittest discover".  This will auto 
+discover all the unit tests written in the tests directory.  An example of 
+the output is as follows:
+
+.............
+----------------------------------------------------------------------
+Ran 13 tests in 0.110s
+
+OK
+
+
+

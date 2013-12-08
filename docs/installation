@@ -1,0 +1,34 @@
+mathservice Installation instructions.
+
+This project is a simple web service example.  
+
+The project was developed, deployed, and tested in Ubuntu 12.04 environment 
+utilizing python 2.7.3 and the Flask microframework.  It will most likely work
+in other Linux and Windows environments with properly configured python and 
+Flask installations, but the instructions/examples provided and testing only
+considered the Ubuntu 12.04 environment. 
+
+To Ubuntu 12.04 iso and installation instructions can be found at
+http://www.ubuntu.com/index_asus.html. 
+
+Python 2.7.3 is the default for Ubuntu 12.04, but can be found at
+http://www.python.org/.
+
+Flask can be found at http://flask.pocoo.org/.  To install on Ubuntu first pip
+needs to be installed.  This can be done with the command "sudo apt-get install
+python-pip". Then the command "sudo pip install Flask" can be run to install Flask.
+
+Install git.  git can be found at .  For Ubuntu perform the command "sudo apt-get 
+install git".
+
+The service can now be retrieved from github at 
+"https://github.com/garmstrong87/mathservice.git".  On Ubuntu got to where you wish 
+to deploy the project and use the git command 
+"git clone git://github.com/garmstrong87/mathservice.git".  
+
+
+The example web service can now be run by typing "python mathservice.py" from 
+the mathservice directory where it was deployed from github.
+
+See the example file in the docs directory to show exercising of the service with a 
+web browser.

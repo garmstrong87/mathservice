@@ -1,0 +1,38 @@
+mathservice example notes.
+
+This project is a simple web service example. 
+
+To exercise the service with a standard web browser do the following.
+
+From the mathservice directory where you deployed the service run the command
+"python mathservice.py"  This will start up the mathservice in Flask running 
+on localhost:5000 by default.
+
+Open a browser.  In the navagation tool bar of your HTTP Browser put in the 
+address: "http://localhost:5000/function"  This will return the JSON containing 
+the current implemented functions.  Currently it looks like this: 
+{"functions": ["fibonacci"]}
+
+To access the fibonacci function go to 
+"http://localhost:5000/function/fibonacci?number=<NUMBER>" where NUMBER is the 
+number of Fibonacci Series terms you wish returned.  For example using 
+"http://localhost:5000/function/fibonacci?number=5" will return
+{"function": "fibonacci", "list_size": 5, "fibonacci_numbers": [0, 1, 1, 2, 3]}
+
+The function only returns terms for the integers in the range 0 to 1000.  Negative 
+numbers, numbers greater than 1000, decimal numbers, and non-numbers will return
+an error message in JSON form.  For instance, using -5 will return the following:
+{"called_method": "GET", "called_url": "/function/fibonacci", 
+"error_message": "Number of items requested must a non-negative integer."}
+
+Using 10000 will return:
+{"called_method": "GET", "called_url": "/function/fibonacci", 
+"error_message": "Number of items requested cannot be greater than 1000"}
+
+Using 5.7 will return:
+{"called_method": "GET", "called_url": "/function/fibonacci", 
+"error_message": "Number of items requested must be an integer value."}
+
+Using xyz will return:
+{"called_method": "GET", "called_url": "/function/fibonacci", 
+"error_message": "Number of items requested must be an integer value."}

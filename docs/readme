@@ -1,0 +1,11 @@
+mathservice docs directory
+
+This project is a simple web service example.
+
+Files:
+
+readme       - This file.
+installation - Installation instructions for function-service.
+design       - Overview of service design.
+test         - Instructions to run unit tests.
+example      - Simple method to perform your own test of the service.

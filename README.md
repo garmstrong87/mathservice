@@ -11,8 +11,8 @@ accounted for.
 
 Files:
 
-readme                  - This file.
-function_service.py     - Sets up and runs Flask server, as well as, providing all
-                          the web entry points.
-fibonacci.py            - Provides Fibonacci Utilities.
-FunctionServiceError.py - Captures error/exception information from within the service.
+readme              - This file.
+mathservice.py      - Sets up and runs Flask server, as well as, providing all
+                      the web entry points.
+fibonacci.py        - Provides Fibonacci Utilities.
+MathServiceError.py - Captures error/exception information from within the service.
