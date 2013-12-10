@@ -40,6 +40,16 @@ Errors are, also, returned with JSON formatted string.  Error format is as follo
    'error_message': "Error Description string"
 }
 
+A Base class MathServiceError was created to be extended for any more specific errors
+created by the service.  Extended from this is the ParameterError class which is used
+as the basis for parameter specific errors:
+NonIntegerError - Indicates that a negative index was selected in a list or series.
+NegativeIndiceError - Indicates that a negative index was selected in a list or series.
+OutOfRangeError - Indicates that an index was selected in a list or series out of the 
+allowed range.
+
+
+
 Implemented files:
 
 mathservice.py      - Setup and run Flask server.  Receive and process URL mappings.

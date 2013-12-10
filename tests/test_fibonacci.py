@@ -5,25 +5,25 @@
 import unittest
 
 import fibonacci
-from MathServiceError import MathServiceError
+import MathServiceError
 
 class TestFibonacciFunctions( unittest.TestCase ):
 
     def test_fibonacci_with_negative_input( self ):
         # Assure negative input for number of terms raises proper error
-        with self.assertRaises( MathServiceError ):
+        with self.assertRaises( MathServiceError.NegativeIndiceError ):
            fibonacci.get_fibonacci_series( -5 )
 
            
     def test_fibonacci_with_input_above_max( self ):
         # Assure input with a value larger than MAX_FIBONACCI_NUMBERS raises proper error
-        with self.assertRaises( MathServiceError ):
+        with self.assertRaises( MathServiceError.OutOfRangeError ):
            fibonacci.get_fibonacci_series( fibonacci.MAX_FIBONACCI_NUMBERS + 1 )
 
            
     def test_fibonacci_with_non_int_input( self ):
         # Assure non-integer input raises proper error 
-        with self.assertRaises( MathServiceError ):
+        with self.assertRaises( MathServiceError.NonIntegerError ):
            fibonacci.get_fibonacci_series( "test" )
            
            

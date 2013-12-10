@@ -4,14 +4,14 @@
 
 import unittest
 
-from MathServiceError import MathServiceError
+import MathServiceError
 
 class TestExceptionFunctions( unittest.TestCase ):
 
     def setUp( self ):
         # Setup - Create standard message for test and create error with the message
         self.test_error_message = "Test Error Message"
-        self.exception = MathServiceError( self.test_error_message )
+        self.exception = MathServiceError.MathServiceError( self.test_error_message )
 
     def test_message( self ):
         # Assure that the message contained and returned by the error matches the

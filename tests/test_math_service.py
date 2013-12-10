@@ -7,15 +7,14 @@ import json
 
 from flask import Flask
 
-from mathservice import * 
-
-from MathServiceError import MathServiceError
+import mathservice
+import MathServiceError
 
 class TestServiceFunctions( unittest.TestCase ):
 
     def test_list_of_implemented_functions( self ):
         # Assure that the proper JSON message type comes back
-        response = json.loads( list_implemented_functions() )
+        response = json.loads( mathservice.list_implemented_functions() )
         self.assertTrue( 'functions' in response )
         
         # Only one current implemented function
@@ -27,7 +26,7 @@ class TestServiceFunctions( unittest.TestCase ):
         app = Flask( __name__ )
 
         with app.test_request_context( '/function/fibonacci?number=3' ):
-            response = json.loads( calculate_fibonacci_series() )
+            response = json.loads( mathservice.calculate_fibonacci_series() )
             self.assertTrue( 'function' in response )
             self.assertEqual( response[ 'function' ], 'fibonacci' )
             self.assertTrue( 'list_size' in response )
@@ -41,7 +40,7 @@ class TestServiceFunctions( unittest.TestCase ):
         app.config['TESTING'] = True
 
         with app.test_request_context( '/function/fibonacci?number=-3' ):
-            response = json.loads( calculate_fibonacci_series() )
+            response = json.loads( mathservice.calculate_fibonacci_series() )
             self.assertTrue( 'called_url' in response )
             self.assertTrue( 'called_method' in response )
             self.assertTrue( 'error_message' in response ) 

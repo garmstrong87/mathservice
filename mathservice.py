@@ -6,7 +6,7 @@
 import json
 
 import fibonacci 
-from MathServiceError import MathServiceError
+import MathServiceError
 
 from flask import Flask
 from flask import request
@@ -26,11 +26,11 @@ def list_implemented_functions():
     return json.dumps( { 'functions': implemented_functions } )
 
 
-def create_json_error_message( error_description ):
+def create_json_error_message( error_cause ):
     # Put together JSON error message
     return json.dumps( { 'called_url': request.url, 
                          'called_method': request.method, 
-                         'error_message': error_description } )
+                         'error_message': error_cause.message() } )
 
     
 @app.route( '/function/fibonacci', methods=[ 'GET' ] )
@@ -46,13 +46,13 @@ def calculate_fibonacci_series():
         number_of_items = int( request.args.get( 'number', '' ) )
     except Exception:
         # Number not an integer, send error message
-        return create_json_error_message( "Number of items requested must be an integer value."  )
+        return create_json_error_message( MathServiceError.NonIntegerError( "Number" ) )
     
     # Get list of Fibonacci numbers
     try:
         series_list = fibonacci.get_fibonacci_series( number_of_items )
-    except MathServiceError, e:
-        return create_json_error_message( e.message()  )
+    except MathServiceError.MathServiceError as error_cause:
+        return create_json_error_message( error_cause )
     
     # Check that proper number of items in the series returned
     if len( series_list ) < number_of_items:

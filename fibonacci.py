@@ -3,7 +3,7 @@
 # Calculate Fibonacci Series [ 0, 1, 1, f(n-2) + f(n-1), .... ]
 # 
 
-from MathServiceError import MathServiceError
+import MathServiceError
 
 # Define maximum number of numbers that will be calculated in the series.
 MAX_FIBONACCI_NUMBERS = 1000
@@ -15,16 +15,15 @@ def get_fibonacci_series( number_of_items ):
     
     # Check if input is an integer or long
     if not isinstance( number_of_items, ( int, long ) ):
-        raise MathServiceError( "Number of items requested must be an integer value." )
+        raise MathServiceError.NonIntegerError( "Number" )
           
     # Check if greater than maximum terms allowed
     if number_of_items > MAX_FIBONACCI_NUMBERS:
-        raise MathServiceError( "Number of items requested cannot be greater than " + 
-                                str( MAX_FIBONACCI_NUMBERS ) )
+        raise MathServiceError.OutOfRangeError( "Number", MAX_FIBONACCI_NUMBERS )
                                     
     # Check if number negative
-    if number_of_items < 0:    
-        raise MathServiceError( "Number of items requested must a non-negative integer." )
+    if number_of_items < 0:
+        raise MathServiceError.NegativeIndiceError( "Number" )
        
     # Special case 0 returns empty list
     list_values = []
