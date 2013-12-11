@@ -7,7 +7,7 @@ class MathServiceError():
     # Base class for errors in the MathService
     
     error_message = None
-    message_type  = "Math Service Default"
+    message_type  = "Default Math Service Error"
         
     def __init__( self, error_message=None ):
         # Init method - initialize to input if any
@@ -26,6 +26,7 @@ class ParameterError( MathServiceError ):
     # Indicates that a negative index was selected in a list or series.
 
     dummy_message = "Error with parameter %s."
+    message_type  = "Default Parameter Error"
     
     def __init__( self, parameter=None ):
         # Initialization method - initialize parameter if supplied
@@ -40,12 +41,14 @@ class NonIntegerError( ParameterError ):
     # Indicates that a negative index was selected in a list or series.
 
     dummy_message = "%s must a non-negative integer."
+    message_type  = "Non-Integer Parameter Error"
 
 
 class NegativeIndiceError( ParameterError ):
     # Indicates that a negative index was selected in a list or series.
 
     dummy_message = "%s must a non-negative integer."
+    message_type  = "Need Non-Negative Parameter Error"
 
 
 class OutOfRangeError( ParameterError ):
@@ -53,6 +56,7 @@ class OutOfRangeError( ParameterError ):
     # the allowed range.
 
     dummy_message = "%(parameter)s cannot be greater than %(upper_bound)i."
+    message_type  = "Parameter Out of Range Error"
     
     def __init__( self, parameter=None, upper_bound=None ):
         # Initialization method - initialize upper bound if supplied
