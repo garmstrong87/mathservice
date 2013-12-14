@@ -12,28 +12,43 @@ from flask import Flask
 from flask import request
 
 # Web Server initialization
-app = Flask( __name__ )
+app = Flask(__name__)
 
 # List of functions with mapping in this service.
-implemented_functions = [ "fibonacci" ]
+implemented_functions = ["fibonacci", "fibonacci_sum"]
 
-@app.route( "/function", methods=[ 'GET' ] )
+@app.route("/function", methods=['GET'])
 def list_implemented_functions():
     #
     # Return the list of functions implemented by the service 
     # as a JSON string.
     #
-    return json.dumps( { 'functions': implemented_functions } )
+    return json.dumps({'functions': implemented_functions})
 
 
-def create_json_error_message( error_cause ):
+def create_json_error_message(error_cause):
     # Put together JSON error message
-    return json.dumps( { 'called_url': request.url, 
-                         'called_method': request.method, 
-                         'error_message': error_cause.message() } )
+    return json.dumps({'called_url': request.url, 
+                       'called_method': request.method, 
+                       'error_message': error_cause.message()})
 
     
-@app.route( '/function/fibonacci', methods=[ 'GET' ] )
+def get_fibonacci_series():  
+    # Get the requested number of items in the series
+    try:
+        number_of_items = int(request.args.get('number', ''))
+    except Exception:
+        # Number not an integer, send error message
+        raise MathServiceError.NonIntegerError("Number")
+    
+    # Get list of Fibonacci numbers
+    try:
+        return fibonacci.create_fibonacci_series(number_of_items)
+    except MathServiceError.MathServiceError as error_cause:
+        raise error_cause  # Send error up
+        
+    
+@app.route('/function/fibonacci', methods=['GET'])
 def calculate_fibonacci_series():
     # Find and return the first X number in the Fibonacci Series.  
     # With X being the input number_of_items.  The return is
@@ -41,26 +56,35 @@ def calculate_fibonacci_series():
     # returned is bounded at MAX_FIBONACCI_NUMBERS
     # on the Fibonacci object.  Negative numbers not allowed. 
                
-    # Get the requested number of items in the series
-    try:
-        number_of_items = int( request.args.get( 'number', '' ) )
-    except Exception:
-        # Number not an integer, send error message
-        return create_json_error_message( MathServiceError.NonIntegerError( "Number" ) )
-    
     # Get list of Fibonacci numbers
     try:
-        series_list = fibonacci.get_fibonacci_series( number_of_items )
+        series_object = get_fibonacci_series()
+        series_list   = series_object.get_series()
     except MathServiceError.MathServiceError as error_cause:
-        return create_json_error_message( error_cause )
+        return create_json_error_message(error_cause)
+        
+    # Return as a properly formatted JSON object
+    return json.dumps({'function' : 'fibonacci', 'list_size': len(series_list), 
+                       'fibonacci_numbers': series_list})
     
-    # Check that proper number of items in the series returned
-    if len( series_list ) < number_of_items:
-        return create_json_error_message( "Server did not return proper number of items from the series."  )
+    
+@app.route('/function/fibonacci_sum', methods=['GET'])
+def calculate_fibonacci_series_sum():
+    # Find and return the sum of the first X number in the Fibonacci Series.  
+    # With X being the input number_of_items.  The return is
+    # currently formatted as a JSON document.   The number of items 
+    # that can be summed is bounded at MAX_FIBONACCI_NUMBERS
+    # on the Fibonacci object.  Negative numbers not allowed. 
+               
+        # Get list of Fibonacci numbers
+    try:
+        series_object = get_fibonacci_series()
+    except MathServiceError.MathServiceError as error_cause:
+        return create_json_error_message(error_cause)
     
     # Return as a properly formatted JSON object
-    return json.dumps( { 'function' : 'fibonacci', 'list_size': len( series_list ), 
-                         'fibonacci_numbers': series_list } )
+    return json.dumps({'function' : 'fibonacci_sum', 
+                       'sum': series_object.get_series_sum()})
     
     
     

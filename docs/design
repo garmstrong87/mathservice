@@ -21,10 +21,19 @@ Implemented functions utilize the GET operation via path
 
 Functions:
 
-Fibonacci Function - returns the first X numbers in the Fibonacci Series.  
-Function is implemented as a GET /function/fibonacii?number=value.
+Fibonacci Object - when populated holds the first X numbers in the 
+Fibonacci Series.  X being the number passed in at object creation.
+Upon the object are the following simple functions:
+    - get_series      - return the populated series as a list 
+    - get_series_term - get the specified term from the series (assumes 
+                        series begins at 1 and so on)
+    - get_last_term   - get the last term from the series
+    - get_series_sum  - calculate and return the sum of all the terms 
+                        in the populated series
 
-The Fibonacci return is formatted as a JSON string in the format below.
+                        
+Function is implemented as a GET /function/fibonacii?number=value.
+The Fibonacci Series return is formatted as a JSON string in the format below.
 
 {
    'function' : 'fibonacci',
@@ -32,7 +41,16 @@ The Fibonacci return is formatted as a JSON string in the format below.
    'fibonacci_numbers': [ 0, 1, 1, 2 .... ]
 }
 
-Errors are, also, returned with JSON formatted string.  Error format is as follows:
+Function is implemented as a GET /function/fibonacii?number=value.
+The Fibonacci Series sum return is formatted as a JSON string in the format below.
+
+{
+   'function' : 'fibonacci_sum',
+   'sum': <sum>, 
+}
+
+Errors are, also, returned with JSON formatted string.  Error format is as 
+follows:
 
 {
    'called_url' : <url string>,
@@ -40,14 +58,16 @@ Errors are, also, returned with JSON formatted string.  Error format is as follo
    'error_message': "Error Description string"
 }
 
-A Base class MathServiceError was created to be extended for any more specific errors
-created by the service.  Extended from this is the ParameterError class which is used
-as the basis for parameter specific errors:
-NonIntegerError - Indicates that a negative index was selected in a list or series.
-NegativeIndiceError - Indicates that a negative index was selected in a list or series.
-OutOfRangeError - Indicates that an index was selected in a list or series out of the 
-allowed range.
-
+A Base class MathServiceError was created to be extended for any more specific 
+errors created by the service.  Extended from this is the ParameterError class 
+which is used as the basis for parameter specific errors:
+NonIntegerError     - Indicates that a negative index was selected in a list 
+                      or series.
+NegativeIndiceError - Indicates that a negative index was selected in a list 
+                      or series.
+OutOfRangeError     - Indicates that an index was selected in a list or series 
+                      out of the allowed range.
+NoInputError        - Indicates that no index was provided for the operation.
 
 
 Implemented files:

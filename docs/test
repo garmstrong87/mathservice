@@ -2,10 +2,11 @@ mathservice test notes.
 
 This project is a simple web service example. 
 
-TUnit tests were created to test the service utilizing the python unittest 
-framework.  To run the unit tests created for the service perform the following.
-The unit tests are in the tests directory under the mathservice directory.  To 
-run the test cd to the tests directory.  Add the mathservice directory to the path.
+TUnit tests were created to test the service utilizing the python 
+unittest framework.  To run the unit tests created for the service 
+perform the following.  The unit tests are in the tests directory 
+under the mathservice directory.  To run the test cd to the tests 
+directory.  Add the mathservice directory to the path.
 
 For ubuntu this can be done by running 
 
@@ -16,11 +17,39 @@ Then you can run the command "python -m unittest discover".  This will auto
 discover all the unit tests written in the tests directory.  An example of 
 the output is as follows:
 
-.............
+...................
 ----------------------------------------------------------------------
-Ran 13 tests in 0.110s
+Ran 19 tests in 0.160s
 
 OK
 
+
+Alternatively, each of the test modules can be run independently after setting 
+the path.  For instance, running "python test_fibonacci.py" will provide 
+slightly more detailed information as follows:
+
+test_fibonacci_get_last_term (__main__.TestFibonacciFunctions) ... ok
+test_fibonacci_get_term (__main__.TestFibonacciFunctions) ... ok
+test_fibonacci_sum (__main__.TestFibonacciFunctions) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK
+test_fibonacci_one_case (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_proper_number_of_elements (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_ten_case (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_three_case (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_two_case (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_with_input_above_max (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_with_negative_input (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_with_no_input (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_with_non_int_input (__main__.TestFibonacciCreate) ... ok
+test_fibonacci_zero_case (__main__.TestFibonacciCreate) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.137s
+
+OK
 
 

@@ -11,7 +11,7 @@ on localhost:5000 by default.
 Open a browser.  In the navagation tool bar of your HTTP Browser put in the 
 address: "http://localhost:5000/function"  This will return the JSON containing 
 the current implemented functions.  Currently it looks like this: 
-{"functions": ["fibonacci"]}
+{"functions": ["fibonacci", "fibonacci_sum"]}
 
 To access the fibonacci function go to 
 "http://localhost:5000/function/fibonacci?number=<NUMBER>" where NUMBER is the 
@@ -22,17 +22,41 @@ number of Fibonacci Series terms you wish returned.  For example using
 The function only returns terms for the integers in the range 0 to 1000.  Negative 
 numbers, numbers greater than 1000, decimal numbers, and non-numbers will return
 an error message in JSON form.  For instance, using -5 will return the following:
-{"called_method": "GET", "called_url": "/function/fibonacci", 
-"error_message": "Number of items requested must a non-negative integer."}
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci?number=-5", 
+"error_message": "Number must a non-negative integer."}
 
 Using 10000 will return:
-{"called_method": "GET", "called_url": "/function/fibonacci", 
-"error_message": "Number of items requested cannot be greater than 1000"}
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci?number=10000", 
+"error_message": "Number cannot be greater than 1000."}
 
 Using 5.7 will return:
-{"called_method": "GET", "called_url": "/function/fibonacci", 
-"error_message": "Number of items requested must be an integer value."}
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci?number=5.7", 
+"error_message": "Number must a non-negative integer."}
 
 Using xyz will return:
-{"called_method": "GET", "called_url": "/function/fibonacci", 
-"error_message": "Number of items requested must be an integer value."}
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci?number=xyz", 
+"error_message": "Number must a non-negative integer."}
+
+To access the fibonacci sum function go to 
+"http://localhost:5000/function/fibonacci_sum?number=<NUMBER>" where NUMBER is the 
+number of Fibonacci Series terms you wish returned.  For example using 
+"http://localhost:5000/function/fibonacci_sum?number=5" will return
+{"function": "fibonacci_sum", "sum": 7}
+
+The function only returns terms for the integers in the range 0 to 1000.  Negative 
+numbers, numbers greater than 1000, decimal numbers, and non-numbers will return
+an error message in JSON form.  For instance, using -5 will return the following:
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci_sum?number=-5", 
+"error_message": "Number must a non-negative integer."}
+
+Using 10000 will return:
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci_sum?number=10000", 
+"error_message": "Number cannot be greater than 1000."}
+
+Using 5.7 will return:
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci_sum?number=5.7", 
+"error_message": "Number must a non-negative integer."}
+
+Using xyz will return:
+{"called_method": "GET", "called_url": "http://localhost:5000/function/fibonacci_sum?number=xyz", 
+"error_message": "Number must a non-negative integer."}
